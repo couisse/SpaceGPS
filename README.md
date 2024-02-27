@@ -1,18 +1,18 @@
 # SpaceGPS
  Un GPS dans l'espace
 
-##Le programme
+## Le programme
 Ce programme a été conçu pour, à partir de la description d'un système solaire en deux dimensions et de la donnée de deux planètes (départ et arrivée), générer une trajectoire interplanétaire entre ces deux dernières, puis de la simuler par intégration d'Euler.
 Ce programme utilise [SFML](https://www.sfml-dev.org/)
 
-##Installation
+## Installation
 Pour les utilisateurs de Windows, un exécutable est disponible [ici]()
 Sinon, il convient d'installer SFML (instructions d'installation [ici](https://www.sfml-dev.org/tutorials/2.6/) ) puis de compiler le projet sous C++11.
 
 Pour le tester, vous pouver utiliser la commande:
 `.\spacegps.exe solar_system.csv Terre auto 0 Mars 4000 deltav 9.81 0 out.csv`
 
-##Utilisation
+## Utilisation
 Le programme s'utilise à la ligne de commande sous deux formes (sgps est le nom d'appel du programme. En utilisant l'executable Windows, cela devient pour cmd `.\spacegps.exe`):
 `sgps <commandsfilename>`
 `sgps <systemfilename> <startname> <startheight(auto/double)> <starttime(double)> <targetname> <targetheight(auto/double)>
