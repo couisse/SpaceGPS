@@ -6,7 +6,7 @@ Ce programme a été conçu pour, à partir de la description d'un système sola
 Ce programme utilise [SFML](https://www.sfml-dev.org/)
 
 ## Installation
-Pour les utilisateurs de Windows, un exécutable est disponible [ici]()
+Pour les utilisateurs de Windows, un exécutable est disponible [ici](https://github.com/couisse/SpaceGPS/releases/tag/win_alpha)
 Sinon, il convient d'installer SFML (instructions d'installation [ici](https://www.sfml-dev.org/tutorials/2.6/) ) puis de compiler le projet sous C++11.
 
 Pour le tester, vous pouver utiliser la commande:
