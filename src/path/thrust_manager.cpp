@@ -60,13 +60,11 @@ bool ThrustCalculator::unengage(){
 
 
     SolarSystem::GlobalSituation situation;
-    Coords targetSpeed = m_path[1].incomming_orbit.get_cartesian_speed_on_time(m_time);
 
     while (m_state == ThrustCalculator::FlyBy){
 
         situation = m_sys->get_situation(m_position, m_time);
 
-        //this->regulate(1, situation, targetSpeed);
         this->followOrbit(situation, m_path[1].incomming_orbit, s_docking_reg);
     }
 
@@ -332,6 +330,9 @@ void ThrustCalculator::updateState(double stepping_time, SolarSystem::GlobalSitu
     ++m_mod;
 
     ///state updating
+
+    m_state = situation.isInSun ? ThrustCalculator::Crashed : ThrustCalculator::SunOrbit;
+
     for (unsigned int i = 0; i < situation.details.size(); ++i){
         switch (situation.details[i].interaction){
         case Planet::Situation::Crashed:
@@ -345,6 +346,4 @@ void ThrustCalculator::updateState(double stepping_time, SolarSystem::GlobalSitu
             break;
         }
     }
-
-    m_state = situation.isInSun ? ThrustCalculator::Crashed : ThrustCalculator::SunOrbit;
 }

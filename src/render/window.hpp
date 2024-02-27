@@ -2,7 +2,7 @@
 #define GAME_HPP_INCLUDED
 
 #include "trajectory_vertices.hpp"
-#include "../test/orbit.hpp"
+#include "../physics/orbit.hpp"
 
 /** \brief Displayer of the app and overlay classes
  */

@@ -6,7 +6,7 @@
 #include "../render/window.hpp"
 #include "../utils/random.hpp"
 
-#include "../test/thrust_manager.hpp"
+#include "../path/thrust_manager.hpp"
 
 /** \brief Main class of the application
  */

@@ -3,7 +3,7 @@
 
 #include <queue>
 
-#include "solarsystem.hpp"
+#include "../physics/solarsystem.hpp"
 
 /** \brief This class generates an array of transfer orbits between a start and a finish planet
  *
