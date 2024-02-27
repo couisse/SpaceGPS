@@ -23,8 +23,8 @@ Dans le premier cas, `commandsfilename` est le nom d'un fichier situé dans le r
 Ex:
 `.\spacegps.exe file.txt`, avec pour fichier `file .txt`:
 ```
-solar_system.csv Terre 7500 0 Mars 4000 balance 9.81 1 out.csv
-solar_system.csv Jupiter 280000 0 Mars 4000 deltav 9.81 0 out.csv
+solar_system.csv Terre 1000 0 Mars 1000 balance 9.81 1 out.csv
+solar_system.csv Jupiter 140000 0 Mars 1000 deltav 9.81 0 out.csv
 ```
 produira le calcul d'une trajectoire de la Terre à Mars, puis de Jupiter à Mars.
 
@@ -44,23 +44,14 @@ Dans le second cas, les arguments ont pour sens suivants:
     **Attention** le comportement du programme face à un système stellaire non réaliste (eg. planètes trop proches, de gravité trop importante...) est indéfini. Il a été conçu à partir de la supposition que l'étoile est l'astre dominant gravitationnellement le système.
 
 + `<startname>` Le nom de la planète de départ
-+ `<startheight(auto/double)>` L'altitude de départ du vaisseau. Pour le simulateur, le vaisseau sera initialement placé en
-    orbite circulaire à cette hauteur. Cela ne compte donc pas la phase de décollage, non prise en charge par le programme
-    Si l'argument est `auto`, l'altitude choisie sera deux fois le rayon de l'astre. A noter que ce choix n'est pas du tout
-    optimal
-+ `<starttime(double)>` Le temps POSIX de départ minimal du vaisseau. Noter que cela n'est pas le temps de départ
-    réel (celui-ci est calculé par le GPS pour être optimal), mais c'est un minorant de ce temps de départ
++ `<startheight(auto/double)>` L'altitude de départ du vaisseau, relativement au sol. Pour le simulateur, le vaisseau sera initialement placé en orbite circulaire à (startheight + rayon). Cela ne compte donc pas la phase de décollage, non prise en charge par le programme Si l'argument est `auto`, l'altitude choisie sera deux fois le rayon de l'astre (et donc l'orbite aura pour rayon trois fois celui de l'astre). A noter que ce choix n'est pas du tout optimal
++ `<starttime(double)>` Le temps POSIX de départ minimal du vaisseau. Noter que cela n'est pas le temps de départ réel (celui-ci est calculé par le GPS pour être optimal), mais c'est un minorant de ce temps de départ
 + `<targetname>` Le nom de  la planète d'arrivée
-+ `<targetheight(auto/double)>` L'altitude cible pour l'arrivée. Le simulateur essayera de se placer en orbite circulaire à
-    cette altitude en fin de voyage
-+ `<scoring(balance/time/deltav)>` La méthode de notation du GPS. `time` essaye de minimiser le temps de voyage, `deltav` le
-    deltav consommé et `balance` le produit des deux
++ `<targetheight(auto/double)>` L'altitude cible pour l'arrivée. Le simulateur essayera de se placer en orbite circulaire à cette altitude en fin de voyage. `auto`a un comportement identique à celui de `<startheight>`
++ `<scoring(balance/time/deltav)>` La méthode de notation du GPS. `time` essaye de minimiser le temps de voyage, `deltav` le deltav consommé et `balance` le produit des deux
 + `<shipacceleration(double)>` L'accélération, en m/s² dont est capable le vaisseau
-+ `<shoulddisplay(1/0)>` Indique si le programme doit invoquer une fenêtre SFML pour afficher la trajectoire. Dans le cas
-    d'un fichier de commande, l'affichage d'une trajectoire bloque le processus. Pour passer à la commande suivante, il faut
-    fermer la fenêtre
-+ `<outputfile>` Le nom d'un fichier. Le programme écrira le résultat de l'exécution à la fin du fichier. Ce résultat est en fait
-    (pour le moment) un profil des performances du programme et non l'enregistrement de la trajectoire (cette fonctionnalité est à venir).
++ `<shoulddisplay(1/0)>` Indique si le programme doit invoquer une fenêtre SFML pour afficher la trajectoire. Dans le cas d'un fichier de commande, l'affichage d'une trajectoire bloque le processus. Pour passer à la commande suivante, il faut fermer la fenêtre
++ `<outputfile>` Le nom d'un fichier. Le programme écrira le résultat de l'exécution à la fin du fichier. Ce résultat est en fait (pour le moment) un profil des performances du programme et non l'enregistrement de la trajectoire (cette fonctionnalité est à venir).
 
 ## Résultat
 

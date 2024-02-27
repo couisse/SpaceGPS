@@ -14,7 +14,7 @@ ThrustCalculator::ThrustCalculator(SolarSystem& system, double max_acceleration)
 }
 
 ThrustCalculator::ThrustPerformances ThrustCalculator::simulate(const std::vector<GPS::Step> path, double initial_orbit_height,
-                                                                  double final_distance, VisualTrajectory* traj) {
+                                                                  double final_height, VisualTrajectory* traj) {
 
 
     m_target = traj;
@@ -43,7 +43,7 @@ ThrustCalculator::ThrustPerformances ThrustCalculator::simulate(const std::vecto
         traj->changeColor(sf::Color::Magenta);
     }
 
-    if (!(this->unengage() && this->travel() && this->park(final_distance))){
+    if (!(this->unengage() && this->travel() && this->park(final_height))){
         consoleLog("Failed to simulate the trajectory", 1);
     }
 
@@ -162,7 +162,7 @@ bool ThrustCalculator::slingshot(){
     return m_state != Crashed;
 }
 
-bool ThrustCalculator::park(double finaldistance){
+bool ThrustCalculator::park(double final_height){
 
 
     SolarSystem::GlobalSituation situation;
@@ -175,6 +175,8 @@ bool ThrustCalculator::park(double finaldistance){
     const Planet* planet = &m_sys->at(planet_nb);
 
     consoleLog("Trying to dock around " << planet->get_name() << "\n", 1);
+
+    double finaldistance = final_height + planet->get_rad();
 
     Coords planetSpeed, planetPos;
     double dockingSpeed = sqrt(G * planet->get_mass() / finaldistance);
