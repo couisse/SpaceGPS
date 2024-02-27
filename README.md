@@ -45,7 +45,7 @@ Dans le second cas, les arguments ont pour sens suivants:
 
 + `<startname>` Le nom de la planète de départ
 + `<startheight(auto/double)>` L'altitude de départ du vaisseau en km, relativement au sol. Pour le simulateur, le vaisseau sera initialement placé en orbite circulaire à (startheight + rayon). Cela ne compte donc pas la phase de décollage, non prise en charge par le programme Si l'argument est `auto`, l'altitude choisie sera deux fois le rayon de l'astre (et donc l'orbite aura pour rayon trois fois celui de l'astre). A noter que ce choix n'est pas du tout optimal
-+ `<starttime(double)>` Le temps POSIX de départ minimal du vaisseau. Noter que cela n'est pas le temps de départ réel (celui-ci est calculé par le GPS pour être optimal), mais c'est un minorant de ce temps de départ
++ `<starttime(double)>` Le temps POSIX de départ minimal du vaisseau. Noter que cela n'est pas le temps de départ réel (celui-ci est calculé par le GPS pour être optimal), mais c'est un minorant de ce temps de départ. Un convertisseur date vers Epoch POSIX peut être trouvé [ici](https://www.epochconverter.com/)
 + `<targetname>` Le nom de  la planète d'arrivée
 + `<targetheight(auto/double)>` L'altitude cible en km pour l'arrivée. Le simulateur essayera de se placer en orbite circulaire à cette altitude en fin de voyage. `auto`a un comportement identique à celui de `<startheight>`. A noter que le programme à pour le moment beaucoup de difficultés à gérer cette étape
 + `<scoring(balance/time/deltav)>` La méthode de notation du GPS. `time` essaye de minimiser le temps de voyage, `deltav` le deltav consommé et `balance` le produit des deux
