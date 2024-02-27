@@ -17,6 +17,8 @@ ThrustCalculator::ThrustPerformances ThrustCalculator::simulate(const std::vecto
                                                                   double final_height, VisualTrajectory* traj) {
 
 
+    bool succeded = true;
+
     m_target = traj;
     m_mod = s_sampleFrequency;
 
@@ -45,10 +47,11 @@ ThrustCalculator::ThrustPerformances ThrustCalculator::simulate(const std::vecto
 
     if (!(this->unengage() && this->travel() && this->park(final_height))){
         consoleLog("Failed to simulate the trajectory", 1);
+        succeded = false;
     }
 
     this->clear();
-    return {m_steps, m_consumed_delta_v, m_time};
+    return {m_steps, m_consumed_delta_v, m_time, succeded};
 }
 
 

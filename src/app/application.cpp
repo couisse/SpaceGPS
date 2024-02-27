@@ -141,7 +141,8 @@ void Application::play(int argc, char** argv){
         std::ofstream output(outputname, std::ios::app);
 
         output << perfs.gpsperf.considered << ";" << perfs.gpsperf.discarded << ";" << perfs.gpsperf.generated << ";"
-            << perfs.thrustperf.steps_number << ";" << perfs.thrustperf.time << ";" << perfs.thrustperf.total_delta_v << std::endl;
+            << perfs.thrustperf.steps_number << ";" << perfs.thrustperf.time << ";" << perfs.thrustperf.total_delta_v
+            << ";" << perfs.thrustperf.success << std::endl;
 
         return;
     }
