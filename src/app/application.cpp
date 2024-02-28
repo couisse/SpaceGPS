@@ -140,9 +140,10 @@ void Application::play(int argc, char** argv){
 
         std::ofstream output(outputname, std::ios::app);
 
-        output << perfs.gpsperf.considered << ";" << perfs.gpsperf.discarded << ";" << perfs.gpsperf.generated << ";"
+        output << sys.size() << ";" << startnumber << ";" << targetnumber << ";" << targetheight << ";"
+            << perfs.gpsperf.considered << ";" << perfs.gpsperf.discarded << ";" << perfs.gpsperf.generated << ";"
             << perfs.thrustperf.steps_number << ";" << perfs.thrustperf.time << ";" << perfs.thrustperf.total_delta_v
-            << ";" << perfs.thrustperf.success << std::endl;
+            << ";" << perfs.thrustperf.success<< ";" << perfs.thrustperf.crashed << std::endl;
 
         return;
     }
@@ -193,8 +194,10 @@ Application::Performances Application::resolve(SolarSystem& sys,
         std::cout << "Step " << i << " " << sys[manouvers[i].planet].get_name() << " on time " << manouvers[i].fly_by_time << std::endl;
     }
 
-    std::cout << "\n" << manouvers.back().fly_by_time / (3600.d * 24.d * 365.d) << " years of travel" << std::endl;
+    std::cout << "\nPredicting " << manouvers.back().fly_by_time / (3600.d * 24.d * 365.d) << " years of travel" << std::endl;
     std::cout << "For " << manouvers.back().total_deltav << "m/s of delta-v\n\n\n" << std::endl;
+
+    std::cout << "Now simulating the travel (this might take a while)...\n" << std::endl;
 
     //simulating the travel
     VisualTrajectory* traj = nullptr;

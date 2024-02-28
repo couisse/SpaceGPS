@@ -153,6 +153,7 @@ struct Elliptic_Orbit::RDV {
 //the deltav price of entering a gravity well and changing speed, while being helped by gravity
 double fly_by_cost(Coords initialSpeed, Coords neededSpeed, Coords planetSpeed);
 
+//the minimum distance between the space craft and a planet on current orbit
 double minrad(Coords relativeSpeed, Coords relativePos, double planetMass);
 
 

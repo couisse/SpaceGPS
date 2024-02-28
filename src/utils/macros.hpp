@@ -8,7 +8,6 @@
 ///Debug configuration
 
 #include <iostream>
-#include <vector>
 
 #define minLogPriority 1
 #define consoleLog(x, priority) { if (priority <= minLogPriority) {std::cout << x << std::endl;} }
