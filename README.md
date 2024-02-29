@@ -8,6 +8,7 @@ Ce programme utilise [SFML](https://www.sfml-dev.org/)
 ## Installation
 Pour les utilisateurs de Windows, un exécutable compressé est disponible [ici](https://github.com/couisse/SpaceGPS/releases)
 Sinon, il convient d'installer SFML (instructions d'installation [ici](https://www.sfml-dev.org/tutorials/2.6/) ) puis de compiler le projet sous C++11.
+Pour le bon fonctionnement du programme, des répertoires `in` et `out` sont nécéssaires au même chemin que l'exécutable
 
 Pour le tester, vous pouver utiliser la commande:
 `./spacegps.exe solar_system.csv Mercure auto 0 Terre 18000 time 9.81 1 out.csv`
