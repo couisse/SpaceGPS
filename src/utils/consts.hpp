@@ -1,6 +1,8 @@
 #ifndef CONSTS_HPP_INCLUDED
 #define CONSTS_HPP_INCLUDED
 
+#include <cmath>
+
 #include <SFML/Graphics.hpp>
 
 ///Window managment

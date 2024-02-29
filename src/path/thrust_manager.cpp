@@ -25,11 +25,15 @@ ThrustCalculator::ThrustPerformances ThrustCalculator::simulate(const std::vecto
     m_path = path;
     m_current_step = 0;
     m_consumed_delta_v = 0;
+    m_progress = 0;
 
     m_next_to = path[0].planet;
 
     m_time = path[0].fly_by_time;
     Coords targetSpeed = path[1].incomming_orbit.get_cartesian_speed_on_time(m_time);
+
+    m_finish_time_frac = 0.05 * (path[path.size()-1].fly_by_time - m_time);
+    m_start_time = m_time;
 
     m_steps = 0;
 
@@ -377,6 +381,8 @@ void ThrustCalculator::updateState(double stepping_time, SolarSystem::GlobalSitu
     }
     ++m_mod;
 
+    this->track_progress();
+
     ///state updating
 
     m_state = situation.isInSun ? ThrustCalculator::Crashed : ThrustCalculator::SunOrbit;
@@ -393,5 +399,19 @@ void ThrustCalculator::updateState(double stepping_time, SolarSystem::GlobalSitu
         default:
             break;
         }
+    }
+}
+
+void ThrustCalculator::track_progress(){
+    if (m_time > m_start_time + m_progress * m_finish_time_frac){
+        std::cout << '[';
+        for (unsigned int i = 0; i < m_progress; ++i){
+            std::cout << "#";
+        }
+        for (unsigned int i = m_progress; i < 20; ++i){
+            std::cout << "-";
+        }
+        std::cout << "] " << m_progress * 5 << "%" << std::endl;
+        ++m_progress;
     }
 }

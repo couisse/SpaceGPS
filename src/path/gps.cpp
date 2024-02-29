@@ -101,6 +101,9 @@ void GPS::extract(int current){
 bool GPS::forward(){
     if (m_queue.empty()){return false;} //something went wrong
 
+    if (m_considered % 50 == 0 && m_considered != 0){
+        std::cout << m_considered << " steps considered thus far. " << m_queue.size() << " pending" << std::endl;
+    }
     m_considered++;
 
     int n_current = m_queue.top();

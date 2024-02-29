@@ -37,6 +37,9 @@ protected:
     //keeping track of the path and the execution of it
     std::vector<GPS::Step> m_path;
     unsigned int m_current_step;
+    unsigned int m_progress;
+    double m_finish_time_frac;
+    double m_start_time;
 
     //keeping track of the acceleration
     double m_max_acceleration;
@@ -104,6 +107,9 @@ protected:
                 RegulationParameters settings);
 
     void updateState(double stepping_time, SolarSystem::GlobalSituation& situation, Coords my_acceleration = NullCoords);
+
+    //a quality of life function, displays how much the program has done
+    void track_progress();
 
 };
 
