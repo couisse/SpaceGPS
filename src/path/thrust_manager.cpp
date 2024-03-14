@@ -49,11 +49,15 @@ ThrustCalculator::ThrustPerformances ThrustCalculator::simulate(const std::vecto
         traj->changeColor(sf::Color::Magenta);
     }
 
-    if (!(this->unengage() && this->travel() && this->park(final_height))){
-        consoleLog("Failed to simulate the trajectory", 1);
+    try {
+        if (!(this->unengage() && this->travel() && this->park(final_height))){
+            consoleLog("Failed to simulate the trajectory", 1);
+            succeded = false;
+        }
+    }catch (std::runtime_error e){
+        std::cout << e.what() << std::endl;
         succeded = false;
     }
-
 
     if (m_state == Crashed){
         consoleLog("Crashed!", 0);
@@ -170,10 +174,10 @@ bool ThrustCalculator::slingshot(){
             error = targetSpeed - m_speed;
 
             if (dot(fly_sit.gravitationnal_acceleration, error) >= 0){
-                this->m_target->changeColor(sf::Color::Green);
+                if (this->m_target){this->m_target->changeColor(sf::Color::Green);}
                 this->updateState(s_fieldTimeStep, situation, NullCoords);
             }else {
-                this->m_target->changeColor(sf::Color::Blue);
+                if (this->m_target){this->m_target->changeColor(sf::Color::Blue);}
                 this->followOrbit(situation, m_path[m_current_step + 1].incomming_orbit, s_orbit_reg);
             }
         }
@@ -308,6 +312,14 @@ bool ThrustCalculator::park(double final_height){
     }while (m_state!= Crashed && (std::abs(fly_sit.distance - finaldistance) > s_epsilonOrbitPos ||
             std::abs(spd - dockingSpeed) > dockingSpeed * s_epsilonSpeedFactor));
 
+
+    stime = m_time;
+
+    while (m_state != Crashed && m_time < stime + 24 * 3600){
+        situation = m_sys->get_situation(m_position, m_time);
+        this->updateState(s_fieldTimeStep, situation, NullCoords);
+    }
+
     consoleLog("Docked on time t = " << m_time, 0);
 
     return m_state!= Crashed;
@@ -413,5 +425,10 @@ void ThrustCalculator::track_progress(){
         }
         std::cout << "] " << m_progress * 5 << "%" << std::endl;
         ++m_progress;
+
+        if (m_progress >= 30){ //on ne se permet pas de dépasser les 150 % de complétion: cela prend trop longtemps. On se permets de dépasser
+            //un peu car la trajectoire peut prendre plus longtemps que prévu
+            throw std::runtime_error("Failed to complete trajectory: too long");
+        }
     }
 }
